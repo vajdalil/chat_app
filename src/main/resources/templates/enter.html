@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>ENTER</title>
+</head>
+<body>
+    <h1>Enter</h1>
+    <form action="#" th:action="@{/enter/}" th:object="${user}" method="post" >
+        <label for="enter">Choose a username</label>
+        <input id="enter" type="text" th:field="${user.name}"/>
+    </form>
+</body>
+</html>
