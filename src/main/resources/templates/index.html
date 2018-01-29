@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
     <h1> Peer to Peer Chat program</h1>
+    <form action="#" th:action="@{/enter/}" th:object="${user}" method="post" >
+        <label for="enter">Your username</label>
+        <input id="enter" placeholder="${user.name}" type="text" name="enter" th:field="${user.name}"/>
+        <input class="btn btn-info" type="submit" value="UPDATE"/>
+    </form>
 </body>
 </html>
