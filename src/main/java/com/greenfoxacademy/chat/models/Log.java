@@ -1,13 +1,21 @@
 package com.greenfoxacademy.chat.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Entity
 public class Log {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @JsonIgnore
+  private long id;
   @JsonProperty("Date and Time")
   private Timestamp time;
   @JsonProperty("Log Level")
@@ -82,5 +90,13 @@ public class Log {
 
   public void setInput(String input) {
     this.input = input;
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 }
