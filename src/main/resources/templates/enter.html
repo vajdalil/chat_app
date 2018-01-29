@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
     <meta charset="UTF-8"/>
     <title>ENTER</title>
 </head>
-<body>
+<body style="font-family: 'Michroma', sans-serif;
+background: url(http://www.theliberati.net/quaequamblog/wp-content/2015/06/cleanwater.jpg);
+background-repeat: no-repeat;
+background-position: 0 0;
+background-size: cover;">
     <h1>Enter</h1>
     <form action="#" th:action="@{/enter/}" th:object="${user}" method="post" >
         <label for="enter">Choose a username</label>
-        <input id="enter" type="text" name="enter" th:field="${user.name}"/>
+        <input id="enter" type="text" name="enter" th:field="*{name}"/>
         <input class="btn btn-info" type="submit" value="ENTER"/>
     </form>
 </body>

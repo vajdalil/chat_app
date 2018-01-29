@@ -3,10 +3,8 @@ package com.greenfoxacademy.chat.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -17,6 +15,12 @@ public class User {
   private long id;
   @JsonProperty("Username")
   private String name;
+  @OneToMany
+  (cascade = CascadeType.ALL,
+  orphanRemoval = true,
+  mappedBy = "user")
+  @JsonProperty("Message")
+  private List<Message> messages;
 
   public User() {
   }
@@ -39,6 +43,14 @@ public class User {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public List<Message> getMessages() {
+    return messages;
+  }
+
+  public void setMessages(List<Message> messages) {
+    this.messages = messages;
   }
 
   //todo override equals method
