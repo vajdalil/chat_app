@@ -3,21 +3,60 @@
 <head>
     <meta charset="UTF-8"/>
     <title>MAIN PAGE</title>
-    <link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Reem+Kufi" rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 </head>
-<body style="font-family: 'Michroma', sans-serif;
+<body style="font-family: 'Reem Kufi', sans-serif;
 background: url(http://www.theliberati.net/quaequamblog/wp-content/2015/06/cleanwater.jpg);
 background-repeat: no-repeat;
 background-position: 0 0;
 background-size: cover;">
-    <h1> Peer to Peer Chat program</h1>
-    <form action="#" th:action="@{/enter/}" th:object="${user}" method="post" >
-        <label for="enter">Your username</label>
-        <input id="enter" th:placeholder="${user.name}" type="text" name="enter" th:field="${user.name}"/>
-        <input class="btn btn-info" type="submit" value="UPDATE"/>
-    </form>
-    <ul>
-    </ul>
+    <h1>Chat Yourself Application</h1>
+
+    <div>
+
+        <form action="#" th:action="@{/update}" th:object="${user}" method="post" >
+            <label for="enter">Your username</label>
+            <input id="enter" th:placeholder="${user.name}" type="text" name="enter" th:field="${user.name}"/>
+            <input class="btn btn-info" type="submit" value="UPDATE"/>
+        </form>
+
+    </div>
+
+    <div th:each="message : ${allMessages}"
+         style="margin-top: 20px">
+
+        <ul th:if="${message.user} != ${user}"
+        style="
+        border-top-right-radius: 30px;
+        border-bottom-right-radius: 30px;
+        background: whitesmoke" >
+            <li style="font-weight: bolder"
+                th:text="${message.user.name}"/>
+            <p th:text="${message.text}"/>
+        </ul>
+        <ul style="
+          background: #0084ff;
+          color: #fff;
+          border-top-left-radius: 30px;
+          border-bottom-left-radius: 30px;"
+            th:unless="${message.user} != ${user}">
+
+            <li style="font-weight: bolder"
+                th:text="${message.user.name}"/>
+            <p th:text="${message.text}"/>
+        </ul>
+
+    </div>
+
+    <div style="margin-top: 20px">
+
+        <form  action="#" th:action="@{/send}" th:object="${newMessage}" method="post" >
+            <input type="text" th:field="*{text}" placeholder="What is in your mind?" />
+            <input class="btn btn-info" type="submit" value="SEND"/>
+        </form>
+
+    </div>
+
 </body>
 </html>

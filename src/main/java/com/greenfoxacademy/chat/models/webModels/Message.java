@@ -1,31 +1,29 @@
-package com.greenfoxacademy.chat.models;
+package com.greenfoxacademy.chat.models.webModels;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 public class Message {
 
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Min(1000000)
-  @Max(9999999)
   private long id;  // todo randomize the id!!!!
+  @JsonIgnore
   @ManyToOne
   private User user;
   private String text;
-  private Timestamp time;
+  private String timestamp;
 
   public Message() {
+    this.timestamp = String.valueOf(LocalDateTime.now());
   }
 
-  public Message(User user, String text, Timestamp time) {
-    //this.user = user;
+  public Message(String text) {
+    this.timestamp = String.valueOf(LocalDateTime.now());
     this.text = text;
-    this.time = time;
   }
 
   public long getId() {
@@ -52,11 +50,11 @@ public class Message {
     this.text = text;
   }
 
-  public Timestamp getTime() {
-    return time;
+  public String getTimestamp() {
+    return timestamp;
   }
 
-  public void setTime(Timestamp time) {
-    this.time = time;
+  public void setTimestamp(String timestamp) {
+    this.timestamp = timestamp;
   }
 }

@@ -1,4 +1,4 @@
-package com.greenfoxacademy.chat.models;
+package com.greenfoxacademy.chat.models.webModels;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,13 +13,17 @@ public class User {
   @GeneratedValue(strategy = GenerationType.AUTO)
   @JsonIgnore
   private long id;
-  @JsonProperty("Username")
+
+  @JsonProperty("id")
   private String name;
+
+  @JsonIgnore
+  @JsonProperty("Messages")
   @OneToMany
   (cascade = CascadeType.ALL,
+  fetch = FetchType.EAGER,
   orphanRemoval = true,
   mappedBy = "user")
-  @JsonProperty("Message")
   private List<Message> messages;
 
   public User() {
@@ -53,5 +57,14 @@ public class User {
     this.messages = messages;
   }
 
-  //todo override equals method
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    User user = (User) o;
+
+    return this.getName().equals(user.getName());
+  }
+
 }

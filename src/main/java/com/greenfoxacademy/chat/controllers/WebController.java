@@ -1,8 +1,9 @@
 package com.greenfoxacademy.chat.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.greenfoxacademy.chat.models.Message;
-import com.greenfoxacademy.chat.models.User;
+import com.greenfoxacademy.chat.models.webModels.Message;
+import com.greenfoxacademy.chat.models.webModels.User;
+import com.greenfoxacademy.chat.services.MessageServiceImp;
 import com.greenfoxacademy.chat.services.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,20 +17,22 @@ public class WebController {
 
   @Autowired
   UserServiceImp userServiceImp;
+  @Autowired
+  MessageServiceImp messageServiceImp;
+
   @JsonIgnore
   private User loggedInUser;
 
   @GetMapping ("/")
-  public String showMainWebPage(Model model) {
+  public String showMainWebPage(Model model, @ModelAttribute Message message) {
     if (loggedInUser == null) {
       return "redirect:/enter";
     }
     model.addAttribute("user", loggedInUser);
-    model.addAttribute("messages", loggedInUser.getMessages()); //todo find all text by user!!!
+    model.addAttribute("allMessages", messageServiceImp.findAll());
+    model.addAttribute("newMessage", new Message());
     return "index";
   }
-
-  //todo LOGIN CONTROLLER
 
   @GetMapping("/enter")
   public String showEnter( Model model) {
@@ -44,11 +47,21 @@ public class WebController {
     return "redirect:/";
   }
 
-  @PostMapping("/send")
-  public String sendMessage(Model model, @ModelAttribute User user, @ModelAttribute Message message) {
-    model.addAttribute("message", );  // todo ide pedig a messages
-    return "redirect:/";
+  //todo THIS IS NOT WORKING
+
+  @PostMapping("/update")
+  public String updateUser(User user) {
+      if(userServiceImp.findAll().contains(user)) {
+        loggedInUser = user;
+        return "redirect:/";
+      }
+      return "redirect:/enter";
   }
 
+  @PostMapping("/send")
+  public String sendMessage(@ModelAttribute Message message) {
+      messageServiceImp.save(message, loggedInUser);
+      return "redirect:/";
+  }
 
 }
