@@ -24,8 +24,8 @@ public class RestController {
   //TODO WHAT IS @ExceptionHandler ?? WHY DO I HAVE TO USE IT??
 
   @ExceptionHandler(Exception.class)
-  public ResponseEntity<JsonRespondStatus> exceptionHandling() {
-    return  ResponseEntity.badRequest().body(new JsonRespondStatus("Error"));
+  public ResponseEntity<JsonRespondMessage> exceptionHandling() {
+    return  ResponseEntity.badRequest().body(new JsonRespondMessage("error", "Missing field(s): message.timestamp, client.id"));
   }
 
   //TODO WHAT IS BindingResult ?? WHY DO I HAVE TO USE IT??

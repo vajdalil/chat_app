@@ -12,20 +12,15 @@ background-repeat: no-repeat;
 background-position: 0 0;
 background-size: cover;">
     <h1>Chat Yourself Application</h1>
-
     <div>
-
         <form action="#" th:action="@{/update}" th:object="${user}" method="post" >
             <label for="enter">Your username</label>
             <input id="enter" th:placeholder="${user.name}" type="text" name="enter" th:field="${user.name}"/>
             <input class="btn btn-info" type="submit" value="UPDATE"/>
         </form>
-
     </div>
-
     <div th:each="message : ${allMessages}"
          style="margin-top: 20px">
-
         <ul th:if="${message.user} != ${user}"
         style="
         border-top-right-radius: 30px;
@@ -46,16 +41,13 @@ background-size: cover;">
                 th:text="${message.user.name}"/>
             <p th:text="${message.text}"/>
         </ul>
-
     </div>
-
     <div style="margin-top: 20px">
-
         <form  action="#" th:action="@{/send}" th:object="${newMessage}" method="post" >
             <input type="text" th:field="*{text}" placeholder="What is in your mind?" />
             <input class="btn btn-info" type="submit" value="SEND"/>
         </form>
-
+        <a class="btn btn-default" onClick="window.location.reload()">REFRESH</a>
     </div>
 
 </body>
