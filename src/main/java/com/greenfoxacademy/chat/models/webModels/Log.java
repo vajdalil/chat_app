@@ -1,4 +1,4 @@
-package com.greenfoxacademy.chat.models;
+package com.greenfoxacademy.chat.models.webModels;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

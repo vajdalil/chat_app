@@ -3,7 +3,9 @@ package com.greenfoxacademy.chat.controllers;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greenfoxacademy.chat.models.webModels.Message;
 import com.greenfoxacademy.chat.models.webModels.User;
+import com.greenfoxacademy.chat.services.MessageService;
 import com.greenfoxacademy.chat.services.MessageServiceImp;
+import com.greenfoxacademy.chat.services.UserService;
 import com.greenfoxacademy.chat.services.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class WebController {
 
   @Autowired
-  UserServiceImp userServiceImp;
+  UserService userService;
   @Autowired
-  MessageServiceImp messageServiceImp;
+  MessageService messageService;
 
   @JsonIgnore
   private User loggedInUser;
@@ -29,7 +31,7 @@ public class WebController {
       return "redirect:/enter";
     }
     model.addAttribute("user", loggedInUser);
-    model.addAttribute("allMessages", messageServiceImp.findAll());
+    model.addAttribute("allMessages", messageService.findAll());
     model.addAttribute("newMessage", new Message());
     return "index";
   }
@@ -42,7 +44,7 @@ public class WebController {
 
   @PostMapping("/enter")
   public String handleLogin(Model model, @ModelAttribute User user) {
-    loggedInUser = userServiceImp.login(user);
+    loggedInUser = userService.login(user);
     model.addAttribute("user", loggedInUser);
     return "redirect:/";
   }
@@ -51,7 +53,7 @@ public class WebController {
 
   @PostMapping("/update")
   public String updateUser(User user) {
-      if(userServiceImp.findAll().contains(user)) {
+      if(userService.findAll().contains(user)) {
         loggedInUser = user;
         return "redirect:/";
       }
@@ -60,7 +62,7 @@ public class WebController {
 
   @PostMapping("/send")
   public String sendMessage(@ModelAttribute Message message) {
-      messageServiceImp.save(message, loggedInUser);
+      messageService.save(message, loggedInUser);
       return "redirect:/";
   }
 

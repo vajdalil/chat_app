@@ -1,6 +1,6 @@
 package com.greenfoxacademy.chat.repositories;
 
-import com.greenfoxacademy.chat.models.Log;
+import com.greenfoxacademy.chat.models.webModels.Log;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
