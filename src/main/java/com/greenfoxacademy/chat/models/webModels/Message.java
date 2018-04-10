@@ -1,11 +1,17 @@
 package com.greenfoxacademy.chat.models.webModels;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
 public class Message {
 
   @Id
@@ -26,35 +32,4 @@ public class Message {
     this.text = text;
   }
 
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public User getUser() {
-    return user;
-  }
-
-  public void setUser(User user) {
-    this.user = user;
-  }
-
-  public String getText() {
-    return text;
-  }
-
-  public void setText(String text) {
-    this.text = text;
-  }
-
-  public String getTimestamp() {
-    return timestamp;
-  }
-
-  public void setTimestamp(String timestamp) {
-    this.timestamp = timestamp;
-  }
 }

@@ -26,8 +26,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile ("org.hibernate:hibernate:3.5.1-Final")
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('mysql:mysql-connector-java')
+	runtime('org.postgresql:postgresql')
 	compile 'postgresql:postgresql:9.1-901-1.jdbc4'
 	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')

@@ -2,14 +2,19 @@ package com.greenfoxacademy.chat.models.webModels;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Log {
 
   @Id
@@ -32,17 +37,6 @@ public class Log {
   @JsonProperty("Input")
   private String input;
 
-  public Log() {
-  }
-
-  public Log(Timestamp time, String level, String data, String endPoint, String method, String input) {
-    this.time = time;
-    this.level = level;
-    this.data = data;
-    this.endPoint = endPoint;
-    this.method = method;
-    this.input = input;
-  }
 
   public Timestamp getTime() {
     return time;

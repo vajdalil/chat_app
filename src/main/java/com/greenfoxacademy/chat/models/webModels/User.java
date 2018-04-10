@@ -2,11 +2,17 @@ package com.greenfoxacademy.chat.models.webModels;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class User {
 
   @Id
@@ -26,35 +32,8 @@ public class User {
   mappedBy = "user")
   private List<Message> messages;
 
-  public User() {
-  }
-
   public User(String name) {
     this.name = name;
-  }
-
-  public long getId() {
-    return id;
-  }
-
-  public void setId(long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public List<Message> getMessages() {
-    return messages;
-  }
-
-  public void setMessages(List<Message> messages) {
-    this.messages = messages;
   }
 
   @Override
