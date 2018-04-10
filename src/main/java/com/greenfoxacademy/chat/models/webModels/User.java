@@ -20,7 +20,13 @@ public class User {
   @JsonIgnore
   private long id;
 
-  @JsonProperty("id")
+  //@Transient
+  private String password;
+
+  @JsonProperty("Id")
+  private String accessToken;
+
+  @JsonProperty("User_Name")
   private String name;
 
   @JsonIgnore
